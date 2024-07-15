@@ -1,8 +1,8 @@
 """Added users, hotels, rooms, bookings
 
-Revision ID: 8420e3afc0c4
+Revision ID: 2b6e1163506d
 Revises: 
-Create Date: 2024-07-16 00:13:12.714297
+Create Date: 2024-07-16 00:24:40.970844
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '8420e3afc0c4'
+revision: str = '2b6e1163506d'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -31,6 +31,7 @@ def upgrade() -> None:
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('email', sa.String(), nullable=False),
     sa.Column('hashed_password', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
@@ -41,7 +42,7 @@ def upgrade() -> None:
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('services', sa.JSON(), nullable=False),
-    sa.Column('quanity', sa.Integer(), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('image_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['hotel_id'], ['hotels.id'], ),
     sa.PrimaryKeyConstraint('id')
